@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose'
 
 import { AuthGuard } from './api/auth/auth.guard'
 import { AuthModule } from './api/auth/auth.module'
+import { GymModule } from './api/gym/gym.module';
 import configuration from './config'
 
 @Module({
@@ -31,6 +32,7 @@ import configuration from './config'
       global: true,
     }),
     AuthModule,
+    GymModule,
   ],
   controllers: [],
   providers: [

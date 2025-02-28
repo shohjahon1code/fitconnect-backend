@@ -37,5 +37,11 @@ module.exports = {
         format: ['UPPER_CASE'],
       },
     ],
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'lf',
+      },
+    ],
   },
 }
