@@ -5,9 +5,6 @@ export type GymDocument = HydratedDocument<Gym>
 
 @Schema({ timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } })
 export class Gym {
-  @Prop({ required: true, unique: true })
-  gym_id: string
-
   @Prop({ required: true })
   name: string
 
