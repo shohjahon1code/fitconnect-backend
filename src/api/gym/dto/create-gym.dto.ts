@@ -10,7 +10,7 @@ import {
 import { Types } from 'mongoose'
 import { IsObjectId } from 'nestjs-object-id'
 
-class LocationDto {
+class LocationDTO {
   @IsNumber()
   lat: number
 
@@ -18,7 +18,7 @@ class LocationDto {
   lng: number
 }
 
-class WorkingHoursDto {
+class WorkingHoursDTO {
   @IsString()
   @IsOptional()
   monday?: string
@@ -48,7 +48,7 @@ class WorkingHoursDto {
   sunday?: string
 }
 
-class PricingDto {
+class PricingDTO {
   @IsNumber()
   @IsOptional()
   daily_pass?: number
@@ -66,7 +66,7 @@ class PricingDto {
   annual_subscription?: number
 }
 
-export class CreateGymDto {
+export class CreateGymDTO {
   @IsString()
   name: string
 
@@ -78,8 +78,8 @@ export class CreateGymDto {
   address: string
 
   @ValidateNested()
-  @Type(() => LocationDto)
-  location: LocationDto
+  @Type(() => LocationDTO)
+  location: LocationDTO
 
   @IsString()
   contact_phone: string
@@ -93,8 +93,8 @@ export class CreateGymDto {
   website?: string
 
   @ValidateNested()
-  @Type(() => WorkingHoursDto)
-  working_hours: WorkingHoursDto
+  @Type(() => WorkingHoursDTO)
+  working_hours: WorkingHoursDTO
 
   @IsString()
   @IsArray()
@@ -107,8 +107,8 @@ export class CreateGymDto {
   photos: string[]
 
   @ValidateNested()
-  @Type(() => PricingDto)
-  pricing: PricingDto
+  @Type(() => PricingDTO)
+  pricing: PricingDTO
 
   @IsNumber()
   average_rating: number

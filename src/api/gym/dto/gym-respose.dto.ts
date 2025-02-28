@@ -1,7 +1,7 @@
 import { Expose, Transform, Type } from 'class-transformer'
 import { Types } from 'mongoose'
 
-class LocationDto {
+class LocationDTO {
   @Expose()
   lat: number
 
@@ -9,7 +9,7 @@ class LocationDto {
   lng: number
 }
 
-class WorkingHoursDto {
+class WorkingHoursDTO {
   @Expose()
   monday?: string
 
@@ -32,7 +32,7 @@ class WorkingHoursDto {
   sunday?: string
 }
 
-class PricingDto {
+class PricingDTO {
   @Expose()
   daily_pass?: number
 
@@ -61,8 +61,8 @@ export class GymResponseDTO {
   address: string
 
   @Expose()
-  @Type(() => LocationDto)
-  location: LocationDto
+  @Type(() => LocationDTO)
+  location: LocationDTO
 
   @Expose()
   contact_phone: string
@@ -74,8 +74,8 @@ export class GymResponseDTO {
   website?: string
 
   @Expose()
-  @Type(() => WorkingHoursDto)
-  working_hours: WorkingHoursDto
+  @Type(() => WorkingHoursDTO)
+  working_hours: WorkingHoursDTO
 
   @Expose()
   amenities: string[]
@@ -84,8 +84,8 @@ export class GymResponseDTO {
   photos: string[]
 
   @Expose()
-  @Type(() => PricingDto)
-  pricing: PricingDto
+  @Type(() => PricingDTO)
+  pricing: PricingDTO
 
   @Expose()
   average_rating: number

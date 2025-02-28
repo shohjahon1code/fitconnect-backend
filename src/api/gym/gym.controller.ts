@@ -10,7 +10,6 @@ import {
   Query,
 } from '@nestjs/common'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
-import { Types } from 'mongoose'
 import { ParseObjectIdPipe } from 'nestjs-object-id'
 
 import { Gym } from 'src/models/gym.schema'
@@ -29,12 +28,13 @@ export class GymController {
   @Get('/')
   @ResponseDTO(GymResponseDTO, { isArray: true })
   async getAll(@Query() query: Record<string, any>) {
-    return await this.gymService.getAll(query)
+    const result = await this.gymService.getAll(query)
+    return { data: result.gyms, pagination_info: result.pagination_info }
   }
 
   @Get('/:id')
   @ResponseDTO(GymResponseDTO)
-  async getOne(@Param('id', ParseObjectIdPipe) id: Types.ObjectId) {
+  async getOne(@Param('id', ParseObjectIdPipe) id: string) {
     const gym = await this.gymService.getOne(id)
 
     if (!gym) {
@@ -52,10 +52,7 @@ export class GymController {
 
   @Put('/:id')
   @ResponseDTO(GymResponseDTO)
-  async update(
-    @Body() gym: Gym,
-    @Param('id', ParseObjectIdPipe) id: Types.ObjectId,
-  ) {
+  async update(@Body() gym: Gym, @Param('id', ParseObjectIdPipe) id: string) {
     const result = await this.gymService.update(id, gym)
     if (!result) {
       throw new NotFoundException('Gym not found')
@@ -65,7 +62,7 @@ export class GymController {
   }
 
   @Delete('/:id')
-  async delete(@Param('id', ParseObjectIdPipe) id: Types.ObjectId) {
+  async delete(@Param('id', ParseObjectIdPipe) id: string) {
     await this.gymService.delete(id)
 
     return { data: null }

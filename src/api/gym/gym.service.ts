@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { Model, Types } from 'mongoose'
+import { Model } from 'mongoose'
 
 import { Gym } from 'src/models/gym.schema'
 
@@ -22,7 +22,7 @@ export class GymService {
     return { gyms, pagination_info }
   }
 
-  async getOne(id: Types.ObjectId) {
+  async getOne(id: string) {
     return await this.gymModel.findById(id)
   }
 
@@ -30,11 +30,11 @@ export class GymService {
     return await this.gymModel.create(gym)
   }
 
-  async update(id: Types.ObjectId, gym: Gym) {
+  async update(id: string, gym: Gym) {
     return await this.gymModel.findByIdAndUpdate(id, gym, { new: true })
   }
 
-  async delete(id: Types.ObjectId) {
+  async delete(id: string) {
     return await this.gymModel.findByIdAndDelete(id)
   }
 }
