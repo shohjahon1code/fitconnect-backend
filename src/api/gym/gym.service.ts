@@ -6,6 +6,9 @@ import { Gym } from 'src/models/gym.schema'
 
 import { APIFeatures } from 'src/common/utils/api-features'
 
+import { CreateGymDTO } from './dto/create-gym.dto'
+import { UpdateGymDTO } from './dto/update-gym.dto'
+
 @Injectable()
 export class GymService {
   constructor(@InjectModel(Gym.name) private readonly gymModel: Model<Gym>) {}
@@ -26,11 +29,11 @@ export class GymService {
     return await this.gymModel.findById(id)
   }
 
-  async create(gym: Gym) {
+  async create(gym: CreateGymDTO) {
     return await this.gymModel.create(gym)
   }
 
-  async update(id: string, gym: Gym) {
+  async update(id: string, gym: UpdateGymDTO) {
     return await this.gymModel.findByIdAndUpdate(id, gym, { new: true })
   }
 

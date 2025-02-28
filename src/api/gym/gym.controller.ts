@@ -12,11 +12,11 @@ import {
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { ParseObjectIdPipe } from 'nestjs-object-id'
 
-import { Gym } from 'src/models/gym.schema'
-
 import { ResponseDTO } from 'src/common/decarators/response.decarator'
 
+import { CreateGymDTO } from './dto/create-gym.dto'
 import { GymResponseDTO } from './dto/gym-respose.dto'
+import { UpdateGymDTO } from './dto/update-gym.dto'
 import { GymService } from './gym.service'
 
 @ApiBearerAuth()
@@ -45,14 +45,17 @@ export class GymController {
 
   @Post('/')
   @ResponseDTO(GymResponseDTO)
-  async create(@Body() gym: Gym) {
+  async create(@Body() gym: CreateGymDTO) {
     const result = await this.gymService.create(gym)
     return { data: result }
   }
 
   @Put('/:id')
   @ResponseDTO(GymResponseDTO)
-  async update(@Body() gym: Gym, @Param('id', ParseObjectIdPipe) id: string) {
+  async update(
+    @Body() gym: UpdateGymDTO,
+    @Param('id', ParseObjectIdPipe) id: string,
+  ) {
     const result = await this.gymService.update(id, gym)
     if (!result) {
       throw new NotFoundException('Gym not found')
